@@ -1,20 +1,73 @@
 const gamegrid = document.getElementById("container")
 
-function WinCondition(board) {
+const winCondition = function (board) {
+    let winner;
+    let victory = false;
+
     for (let i = 0; i < 3; i++) {
         if (
             board[i][0].value === board[i][1].value &&
-            board[i][1].value === board[i][2].value 
+            board[i][1].value === board[i][2].value &&
+            board[i][0].value != 0
         ) {
-            return true
-        } 
+            if (board[i][0].value === 1) {
+                winner = "player 1"
+                victory = true;
+            } else {
+                winner = "player 2"
+                victory = true;
+            }
+            return { winner, victory }
+        }
+        if (
+            board[0][i].value === board[1][i].value &&
+            board[1][i].value === board[2][i].value &&
+            board[0][i].value != 0
+        ) {
+            if (board[0][i].value === 1) {
+                winner = "player 1"
+                victory = true;
+            } else {
+                winner = "player 2"
+                victory = true;
+            }
+            return { winner, victory }
+        }
     }
-    return false;
+
+    if (
+        board[0][0].value === board[1][1].value &&
+        board[1][1].value === board[2][2].value &&
+        board[0][0].value != 0
+    ) {
+        if (board[0][0].value === 1) {
+            winner = "player 1"
+            victory = true;
+        } else {
+            winner = "player 2"
+            victory = true;
+        }
+        return { winner, victory }
+    }
+    if (
+        board[0][2].value === board[1][1].value &&
+        board[1][1].value === board[2][0].value &&
+        board[0][2].value != 0
+    ) {
+        if (board[0][2].value === 1) {
+            winner = "player 1"
+            victory = true;
+        } else {
+            winner = "player 2"
+            victory = true;
+        }
+        return { winner, victory }
+    }
+
+    return { winner, victory }
 }
 
 function CreateCell(players, board, i, j) {
-
-    this.id = `${i}${j}`
 
     this.value = 0,
 
@@ -24,34 +77,22 @@ function CreateCell(players, board, i, j) {
             cell.classList.add("cell")
             gamegrid.appendChild(cell)
             cell.addEventListener("click", () => {
-                for (let row = 0; row < 3; row++) {
-                    for (let column = 0; column < 3; column++) {
-                        if (board[i][j] === 0) {
-                            continue;
-                        } else {
-                            break
-                        }
-                    }
-                }
-
                 if (board[i][j].value === 0) {
                     if (players[0].turn) {
                         board[i][j].value = 1;
                         cell.textContent = "X";
                         players[1].turn = true;
                         players[0].turn = false;
-                        if (WinCondition(board)) {
-                            alert("Player 1 Won")
-                        }
                     } else {
                         board[i][j].value = 2;
                         cell.textContent = "O";
                         players[0].turn = true;
                         players[1].turn = false;
-                        if (WinCondition(board)) {
-                            alert("Player 2 Won")
-                        }
                     }
+                }
+
+                if (winCondition(board).victory === true) {
+                    alert(`${winCondition(board).winner} won!`)
                 }
             })
         })();
@@ -62,12 +103,10 @@ function CreateCell(players, board, i, j) {
 const game = (() => {
     let players = [
         {
-            name: "Player One",
             turn: true,
             wins: 0,
         },
         {
-            name: "Player Two",
             turn: false,
             wins: 0,
         }
