@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <title>Tic-Tac-Toe</title>
 </head>
+
 <body>
-    <div id="container"></div>
+    <div class="player-box p1">
+        <h1>Player X</h1>
+        <p>Wins: 0</p>
+        <button>Change name</button>
+    </div>
+    <div class="game">
+        <div id="container"></div>
+        <button id="reset">Reset</button>
+    </div>
+    <div class="player-box p2">
+        <h1>Player O</h1>
+        <p>Wins: 0</p>
+        <button>Change name</button>
+    </div>
     <script src="./app.js"></script>
 </body>
+
 </html>

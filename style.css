@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "GeneraleStation";
+    src: url(./assets/font/GeneraleStation-Regular.otf);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,13 +13,60 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 120px;
+
+    background-color: #303841;
 
     height: 100vh;
     width: 100%;
 }
 
+.player-box{
+    height: 420px;
+    width: 420px;
+
+    font-family: "GeneraleStation", monospace;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.player-box p {
+    font-size: 24px;
+}
+
+.player-box h1 {
+    font-size: 36px;
+}
+
+button {
+    border: none;
+    background-color: #F5F5F5;
+
+    padding: 4px 12px;
+    font-size: 16px;
+    font-family: "GeneraleStation", monospace;
+    width: fit-content;
+}
+
+#reset {
+
+    padding: 12px 24px;
+    font-size: 24px;
+}
+
+.game{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+
 #container {
-    background-color: bisque;
+    background-color: #F5F5F5;
 
     height: 420px;
     width: 420px;
@@ -22,13 +74,32 @@ body {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+
+    font-family: "GeneraleStation", monospace;
 }
 
 .cell {
-    border: 1px solid red;
+    background-color: #303841;
     font-size: 72px;
 
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.p1 {
+    color: #76ABAE;
+}
+
+.p1-win {
+    background-color: #76ABAE !important;
+}
+
+.p2 {
+    color: #FF5722;
+}
+
+.p2-win {
+    background-color: #FF5722 !important;
 }
