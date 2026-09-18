@@ -1,6 +1,5 @@
 const gamegrid = document.getElementById("container")
 let gameOverlay = document.getElementById("game-over")
-let announce = document.createElement("p")
 
 const game = (() => {
     let players = [
@@ -46,6 +45,17 @@ const game = (() => {
     let announce = document.createElement("p")
     let p1Wins = document.getElementById("p1-wins")
     let p2Wins = document.getElementById("p2-wins")
+
+    let p1Name = document.getElementById("p1-name")
+    let p2Name = document.getElementById("p2-name")
+    let p1Btn = document.getElementById("change-p1").addEventListener("click", () => {
+        players[0].changeName()
+        p1Name.textContent = players[0].name;
+    })
+    let p2Btn = document.getElementById("change-p2").addEventListener("click", () => {
+        players[1].changeName()
+        p2Name.textContent = players[1].name;
+    })
 
     const winCondition = (board, players) => {
 
@@ -110,7 +120,6 @@ const game = (() => {
                     gameOverlay.appendChild(announce)
                 }
             }
-
         })();
 
         return victory;
