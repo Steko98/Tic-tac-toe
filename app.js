@@ -1,10 +1,12 @@
 const gamegrid = document.getElementById("container")
+let gameOverlay = document.getElementById("game-over")
+let announce = document.createElement("p")
 
 const game = (() => {
     let players = [
         {
             id: 1,
-            name: "Player 1",
+            name: "Player One",
             turn: true,
             wins: 0,
             changeName() {
@@ -13,7 +15,7 @@ const game = (() => {
         },
         {
             id: 2,
-            name: "Player 2",
+            name: "Player Two",
             turn: false,
             wins: 0,
             changeName() {
@@ -40,6 +42,10 @@ const game = (() => {
 
     let lastWinner;
     let victory = false;
+
+    let announce = document.createElement("p")
+    let p1Wins = document.getElementById("p1-wins")
+    let p2Wins = document.getElementById("p2-wins")
 
     const winCondition = (board, players) => {
 
@@ -68,16 +74,44 @@ const game = (() => {
                         game.lastWinner = players[0].name;
                         players[0].wins++;
                         game.victory = true;
-                        alert(players[0].name)
+                        announce.classList.add("p1")
                     } else if (a === 2) {
                         game.lastWinner = players[1].name;
                         players[1].wins++;
                         game.victory = true;
-                        alert(players[1].name)
+                        announce.classList.add("p2")
                     }
+
+                    gameOverlay.classList.remove("hide")
+                    announce.textContent = `${game.lastWinner} won!`
+                    gameOverlay.appendChild(announce)
+                    p1Wins.textContent = `Wins: ${players[0].wins}`
+                    p2Wins.textContent = `Wins: ${players[1].wins}`
                 }
             }
         }
+
+        (() => {
+            if (game.victory === false) {
+                let drawCheck = [];
+                boardCopy.forEach((element) => {
+                    if (element.value === 0) {
+                        drawCheck.push(0);
+                    } else {
+                        return
+                    }
+                })
+                if (drawCheck.includes(0)) {
+                    return
+                } else {
+                    game.victory = true;
+                    announce.textContent = "It's a draw!"
+                    gameOverlay.classList.remove("hide")
+                    gameOverlay.appendChild(announce)
+                }
+            }
+
+        })();
 
         return victory;
 
@@ -98,10 +132,16 @@ const game = (() => {
                 cells[i].classList.remove("p2")
             }
         }
+        if (announce.classList.contains("p1")) {
+            announce.classList.remove("p1")
+        } else if (announce.classList.contains("p2")) {
+            announce.classList.remove("p2")
+        }
         players[0].turn = true;
         players[1].turn = false;
         game.lastWinner = null;
         game.victory = false;
+        gameOverlay.classList.add("hide")
     }
 
     return { players, gameboard, reset, winCondition, lastWinner };
@@ -134,10 +174,6 @@ function CreateCell(players, board, i, j) {
                 }
 
                 game.winCondition(board, players);
-
-                if (game.victory) {
-                    alert(game.lastWinner)
-                }
             })
         })();
 

@@ -10,17 +10,20 @@
 
 <body>
     <div class="player-box p1">
-        <h1>Player X</h1>
-        <p>Wins: 0</p>
+        <h1 id="p1-name">Player X</h1>
+        <p id="p1-wins">Wins: 0</p>
         <button>Change name</button>
     </div>
     <div class="game">
-        <div id="container"></div>
+        <div id="container">
+            <div id="game-over" class="hide">
+            </div>
+        </div>
         <button id="reset">Reset</button>
     </div>
     <div class="player-box p2">
-        <h1>Player O</h1>
-        <p>Wins: 0</p>
+        <h1 id="p2-name">Player O</h1>
+        <p id="p2-wins">Wins: 0</p>
         <button>Change name</button>
     </div>
     <script src="./app.js"></script>

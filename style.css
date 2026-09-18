@@ -21,7 +21,7 @@ body {
     width: 100%;
 }
 
-.player-box{
+.player-box {
     height: 420px;
     width: 420px;
 
@@ -58,11 +58,41 @@ button {
     font-size: 24px;
 }
 
-.game{
+.game {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 60px;
+}
+
+#game-over {
+    position: absolute;
+    height: 420px;
+    width: 420px;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+#game-over>p {
+    font-size: 48px;
+    color: white;
+
+    text-align: center;
+
+    height: fit-content;
+    width: min-content;
+}
+
+.hide {
+    display: none !important;
 }
 
 #container {
@@ -89,7 +119,7 @@ button {
 }
 
 .p1 {
-    color: #76ABAE;
+    color: #76ABAE !important;
 }
 
 .p1-win {
@@ -97,7 +127,7 @@ button {
 }
 
 .p2 {
-    color: #FF5722;
+    color: #FF5722 !important;
 }
 
 .p2-win {
